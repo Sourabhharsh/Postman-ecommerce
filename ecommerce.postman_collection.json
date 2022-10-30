@@ -1,0 +1,578 @@
+{
+	"info": {
+		"_postman_id": "c8dfb12a-e890-4dd2-8abf-4fb4085920d6",
+		"name": "ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23224931"
+	},
+	"item": [
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "Get_orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const getallorders=pm.response.json();\r",
+									"const total=getallorders.count\r",
+									"let oid,name;\r",
+									"console.log(total);\r",
+									"for(let i=0;i<total;i++){\r",
+									"    if(getallorders.orders[i].product!=null)\r",
+									"    {\r",
+									"        name-getallorders.orders[i].product.name;//console.log(name);\r",
+									"        if(name==\"powerbanks\")\r",
+									"        {\r",
+									"            //console.log(name);\r",
+									"            oid=getallorders.orders[i]._id;\r",
+									"            console.log(oid);pm.environment.set(\"oid\",oid);\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"        \r",
+									"    \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ticket}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Baseulr}}/orders",
+							"host": [
+								"{{Baseulr}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"product\": \"621735517a9fc400174c28ab\",\r\n \"quantity\": 5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/orders",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/orders/631a05ba2ec7fa001723aa6d",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders",
+								"631a05ba2ec7fa001723aa6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"product\": \"621735517a9fc400174c28ab\",\r\n \"quantity\": 5\r\n}"
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/orders/631a05ba2ec7fa001723aa6d",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders",
+								"631a05ba2ec7fa001723aa6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/orders/631a05ba2ec7fa001723aa6d",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders",
+								"631a05ba2ec7fa001723aa6d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\": \"sourabh@gmail.com\",\r\n\t\"password\": \"sourabh@123\"\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseulr}}/user/signup",
+					"host": [
+						"{{Baseulr}}"
+					],
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\",function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.environment.set(\"ticket\",jsonData.accessToken);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\": \"sourabh@gmail.com\",\r\n\t\"password\": \"sourabh@123\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseulr}}/user/login",
+					"host": [
+						"{{Baseulr}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Baseulr}}/user",
+					"host": [
+						"{{Baseulr}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://ecommerceservice.herokuapp.com/user/6270d7d194998a00176462d1",
+					"protocol": "https",
+					"host": [
+						"ecommerceservice",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						"6270d7d194998a00176462d1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://ecommerceservice.herokuapp.com/products",
+					"protocol": "https",
+					"host": [
+						"ecommerceservice",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"soap\",\r\n\t\"price\": 2333\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseulr}}/products",
+					"host": [
+						"{{Baseulr}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_product by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ecommerceservice.herokuapp.com/products/63199264428a2200172f0ff7",
+					"protocol": "https",
+					"host": [
+						"ecommerceservice",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"products",
+						"63199264428a2200172f0ff7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{{{token}}}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"soap\",\r\n\t\"price\": 2333\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ecommerceservice.herokuapp.com/products/63199264428a2200172f0ff7",
+					"protocol": "https",
+					"host": [
+						"ecommerceservice",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"products",
+						"63199264428a2200172f0ff7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE4ZDRkNzg5OWUyZTAwMTc4NzIxZjkiLCJpYXQiOjE2NjI1NzIxNTAsImV4cCI6MTY2MjY1ODU1MH0.z_wwiIipFZUeza-ntNqg8ezKXpaTObvBH9vO5AojnAk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://ecommerceservice.herokuapp.com/products/63199264428a2200172f0ff7",
+					"protocol": "https",
+					"host": [
+						"ecommerceservice",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"products",
+						"63199264428a2200172f0ff7"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Baseulr",
+			"value": "https://ecommerceservice.herokuapp.com"
+		}
+	]
+}
